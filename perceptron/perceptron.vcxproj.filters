@@ -2,15 +2,13 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\pch.cpp" />
-    <ClCompile Include="src\neuron.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\neuron.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="training_data.txt" />
-    <Text Include="training_file.txt" />
+    <None Include=".vs\ProjectSettings.json" />
+    <None Include=".vs\slnx.sqlite" />
+    <None Include=".vs\VSWorkspaceState.json" />
   </ItemGroup>
 </Project>
