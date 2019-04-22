@@ -5,7 +5,6 @@
 #include <ctime>
 #include <cstdlib>
 #include <string>
-#include <thread>
 #include <limits>
 #include <cmath>
 

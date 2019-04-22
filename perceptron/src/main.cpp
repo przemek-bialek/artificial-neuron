@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "neuron.h"
+#include "neuron\neuron.h"
 
 template <typename T>
 void insert_value(T& var)

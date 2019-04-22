@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "perceptron", "perceptron\perceptron.vcxproj", "{DDC4A8B8-BA27-4057-BCED-D256B8266FCD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "neuron", "neuron\neuron.vcxproj", "{952F67AA-D049-46A5-AC31-98E3CFB206E2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -23,14 +21,6 @@ Global
 		{DDC4A8B8-BA27-4057-BCED-D256B8266FCD}.Release|x64.Build.0 = Release|x64
 		{DDC4A8B8-BA27-4057-BCED-D256B8266FCD}.Release|x86.ActiveCfg = Release|Win32
 		{DDC4A8B8-BA27-4057-BCED-D256B8266FCD}.Release|x86.Build.0 = Release|Win32
-		{952F67AA-D049-46A5-AC31-98E3CFB206E2}.Debug|x64.ActiveCfg = Debug|x64
-		{952F67AA-D049-46A5-AC31-98E3CFB206E2}.Debug|x64.Build.0 = Debug|x64
-		{952F67AA-D049-46A5-AC31-98E3CFB206E2}.Debug|x86.ActiveCfg = Debug|Win32
-		{952F67AA-D049-46A5-AC31-98E3CFB206E2}.Debug|x86.Build.0 = Debug|Win32
-		{952F67AA-D049-46A5-AC31-98E3CFB206E2}.Release|x64.ActiveCfg = Release|x64
-		{952F67AA-D049-46A5-AC31-98E3CFB206E2}.Release|x64.Build.0 = Release|x64
-		{952F67AA-D049-46A5-AC31-98E3CFB206E2}.Release|x86.ActiveCfg = Release|Win32
-		{952F67AA-D049-46A5-AC31-98E3CFB206E2}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
