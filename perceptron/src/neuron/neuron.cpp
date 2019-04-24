@@ -62,7 +62,7 @@ void Neuron::init_with_file()
 		file >> inputs_qtty;
 		file >> samples_qtty;
 		file >> learning_coefficient;
-		file_pos = file.tellg();
+		file_pos = (int)file.tellg();
 		first_sample_position = file_pos;
 	}
 }
@@ -86,7 +86,7 @@ void Neuron::init_arrays()
 
 	inputs[0] = 1.0f;
 
-	for (int i = 0; i < inputs_qtty; i++)
+	for (unsigned int i = 0; i < inputs_qtty; i++)
 		weights[i] = 2.0f * ((float)rand() / (float)RAND_MAX) - 1.0f;
 }
 
@@ -102,9 +102,6 @@ void Neuron::init()
 	std::cout << "\namount_of_inputs samples_qtty learning_coefficient momentum_coefficient(this one only for sigmoidal function)\n";
 	std::cout << "input[1] input[2] ... input[amount_of_inputs] desired_output\n";
 	std::cout << "input[1] input[2] ... input[amount_of_inputs] desired_output\n\n";
-
-	std::cout << "\nWhen initializing through file first line of training file should consist of:\n";
-	std::cout << "\ninputs_qtty samples_qtty learning_coefficient\n";
 
 	std::cout << "\nHow to init neuron?\n";
 	std::cout << "1) File (.txt)\n";
@@ -130,6 +127,7 @@ void Neuron::init()
 	case 2:
 	{
 		std::cout << "Insert learning coefficient, momentum_coefficient (only for sigm), inputs quantity and amount of samples (training filename and output filename are optional)\n";
+		std::cout << "First line of training file is not needed in this case\n";
 		init_with_console();
 		std::cout << "Do you want to insert optional params?(y)\n";
 		std::cin >> optional;
@@ -137,7 +135,6 @@ void Neuron::init()
 		{
 			training_filename = training_dir;
 			output_filename = results_dir;
-			std::cout << "First line of training file is not needed in this case\n";
 			std::cout << "Training filename: ";
 			insert_fname(tmp);
 			training_filename += tmp;
@@ -160,10 +157,10 @@ void Neuron::fetch_data()
 	if (file.is_open())
 	{
 		file.seekg(file_pos,std::ios_base::beg);
-		for (int i = 1; i < inputs_qtty; i++)
+		for (unsigned int i = 1; i < inputs_qtty; i++)
 			file >> inputs[i];
 		file >> desired_output;
-		file_pos = file.tellg();
+		file_pos = (int)file.tellg();
 		file.close();
 	}
 	else
@@ -174,7 +171,7 @@ void Neuron::training_function()
 {
 	float sum = 0;
 
-	for (int i = 0; i < inputs_qtty; i++)
+	for (unsigned int i = 0; i < inputs_qtty; i++)
 		sum += inputs[i] * weights[i];
 
 	output = (sum > 0 ? 1 : 0);
@@ -187,7 +184,7 @@ void Neuron::weights_adaptation()
 		float tmp = learning_coefficient * (desired_output - output);
 
 		correct_decisions = 0;
-		for (int i = 0; i < inputs_qtty; i++)
+		for (unsigned int i = 0; i < inputs_qtty; i++)
 			weights[i] = weights[i] + tmp * inputs[i];
 	}
 	else
@@ -222,7 +219,7 @@ void Neuron::weights_derivation()
 	if (file.is_open())
 	{
 		std::cout << "Done! Check \"" << output_filename << "\" for results\n";
-		for (int i = 0; i < inputs_qtty; i++)
+		for (unsigned int i = 0; i < inputs_qtty; i++)
 			file << "weights[" << i << "] = " << weights[i] << "\n";
 		file.close();
 		return;
@@ -334,7 +331,7 @@ void Neuron_sigm::init_with_file()
 		file >> samples_qtty;
 		file >> learning_coefficient;
 		file >> momentum_coefficient;
-		file_pos = file.tellg();
+		file_pos = (int)file.tellg();
 		first_sample_position = file_pos;
 	}
 }
@@ -361,17 +358,17 @@ void Neuron_sigm::init_arrays()
 
 	inputs[0] = 1.0f;
 
-	for (int i = 0; i < inputs_qtty; i++)
+	for (unsigned int i = 0; i < inputs_qtty; i++)
 	{
 		weights[i] = 2.0f * ((float)rand() / (float)RAND_MAX) - 1.0f;
 		prev_weights[i] = 0.0f;
 	}
 }
 
-void Neuron_sigm::sigm_init()
+void Neuron_sigm::init()
 {
 	char choice;
-	init();
+	Neuron::init();
 
 	std::cout << "Following parameters are optional\n";
 	std::cout << "Do you want to specify?(y-yes other-no):\n";
@@ -406,7 +403,7 @@ void Neuron_sigm::training_function()
 {
 	float sum = 0;
 
-	for (int i = 0; i < inputs_qtty; i++)
+	for (unsigned int i = 0; i < inputs_qtty; i++)
 		sum += inputs[i] * weights[i];
 
 	output = (1.0f / (1.0f + pow(e, -sum)) > 0.5f ? 1 : 0);
@@ -420,7 +417,7 @@ void Neuron_sigm::weights_adaptation()
 
 		float tmp;
 
-		for (int i = 0; i < inputs_qtty; i++)
+		for (unsigned int i = 0; i < inputs_qtty; i++)
 		{
 			tmp = weights[i];
 			weights[i] = weights[i] + learning_coefficient * inputs[i] + momentum_coefficient * (prev_weights[i] - weights[i]);

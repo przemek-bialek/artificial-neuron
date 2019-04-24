@@ -30,7 +30,7 @@ public:
 	virtual void init_arrays();
 	virtual void init_with_file();
 	virtual void init_with_console();
-	void init();
+	virtual void init();
 
 	//learning
 	void fetch_data();
@@ -85,7 +85,7 @@ public:
 	void init_arrays();
 	void init_with_file();
 	void init_with_console();
-	void sigm_init();
+	void init();
 
 	//learning 
 	void training_function();

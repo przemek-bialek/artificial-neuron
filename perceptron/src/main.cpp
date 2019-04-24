@@ -1,8 +1,7 @@
 #include "pch.h"
 #include "neuron\neuron.h"
 
-template <typename T>
-void insert_value(T& var)
+void insert_value(int& var)
 {
 	std::cin >> var;
 	while (!std::cin)
@@ -12,32 +11,6 @@ void insert_value(T& var)
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::cin >> var;
 	}
-}
-
-void check_filename(std::string& name)
-{
-	int size = name.size();
-	if (size < 4)
-	{
-		name += ".txt";
-		return;
-	}
-	std::string tmp;
-	for (int i = size - 4; i < size; i++)
-		tmp += name[i];
-	if (tmp != ".txt"&&tmp != ".TXT")
-		name += ".txt";
-}
-
-void insert_fnames(std::string& name1, std::string& name2)
-{
-	std::cout << "Insert training filename and output filename\n";
-	std::cout << "Training filename: ";
-	std::cin >> name1;
-	check_filename(name1);
-	std::cout << "Output filename: ";
-	std::cin >> name2;
-	check_filename(name2);
 }
 
 bool menu()
@@ -58,32 +31,17 @@ int main()
 		srand(time(0));
 
 		bool is_step = menu();
-		if (is_step)
+		Neuron* neuron = is_step ? new Neuron() : new Neuron_sigm();
+		neuron->init();
+		while (1)
 		{
-			Neuron neuron;
-			neuron.init();
-			while (1)
-			{
-				neuron.fetch_data();
-				neuron.training_function();
-				neuron.weights_adaptation();
-				if (neuron.stop_criterion())
-					break;
-			}
+			neuron->fetch_data();
+			neuron->training_function();
+			neuron->weights_adaptation();
+			if (neuron->stop_criterion())
+				break;
 		}
-		else
-		{
-			Neuron_sigm neuron;
-			neuron.init();
-			while (1)
-			{
-				neuron.fetch_data();
-				neuron.training_function();
-				neuron.weights_adaptation();
-				if (neuron.stop_criterion())
-					break;
-			}
-		}
+		delete neuron;
 	}
 	catch (const std::string& exception)
 	{
