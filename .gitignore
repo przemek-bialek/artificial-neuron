@@ -1,8 +1,6 @@
 # Directories
 .vs/
 bin/
-perceptron/training/
-perceptron/results/
 
 # Files
 *.user
